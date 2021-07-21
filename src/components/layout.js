@@ -1,16 +1,10 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
+/** @jsx jsx */
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
+import { Global, css, jsx } from '@emotion/react';
 
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-import "./layout.css"
+import Header from './header';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -21,35 +15,72 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
+      <Global
+        styles={css`
+          * {
+            box-sizing: border-box;
+            margin: 0;
+          }
+
+          * + * {
+            margin-top: 1rem;
+          }
+
+          html,
+          body {
+            color: #555;
+            font-family: sans-serif;
+            font-size: 18px;
+            margin: 0;
+            line-height: 1.5;
+          }
+
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            color: #222;
+            line-height: 1.1;
+
+            + * {
+              margin-top: 0.5rem;
+            }
+          }
+
+          strong {
+            color: #222;
+          }
+
+          li {
+            margin-top: 0.25rem;
+          }
+        `}
+      />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      <main
+        css={css`
+          margin: 2rem auto;
+          width: 900px;
+          max-width: 90vw;
+        `}
+      >{children}</main>
+      <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a>
+      </footer>
     </>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;
