@@ -5,6 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { Global, css, jsx } from '@emotion/react';
 
 import Header from './header';
+import Seo from './seo';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -62,6 +63,7 @@ const Layout = ({ children }) => {
           }
         `}
       />
+      <Seo />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <main
         css={css`
@@ -70,11 +72,6 @@ const Layout = ({ children }) => {
           max-width: 90vw;
         `}
       >{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
     </>
   );
 };
