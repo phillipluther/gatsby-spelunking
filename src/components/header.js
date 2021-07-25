@@ -18,6 +18,14 @@ const NavLink = styled(Link)`
   }
 `;
 
+const NavItem = styled.li`
+  margin: 0 0.5rem 0 0;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+`;
+
 const Header = ({ siteTitle }) => (
   <header
     css={css`
@@ -43,12 +51,15 @@ const Header = ({ siteTitle }) => (
           list-style: none;
         `}
       >
-        <li>
+        <NavItem>
           <NavLink to="/" activeClassName="current-page">Home</NavLink>
-        </li>
-        <li>
+        </NavItem>
+        <NavItem>
           <NavLink to="/about" activeClassName="current-page">About</NavLink>
-        </li>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/contact" activeClassName="current-page">Contact Me</NavLink>
+        </NavItem>
       </ul>
     </nav>
   </header>
